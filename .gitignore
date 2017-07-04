@@ -2,7 +2,8 @@
 !.gitignore
 !/modules
 /modules/*
-!/modules/news
+!/modules/newmodule
+
 !/config
 /config/*
 !/config/defines.inc.php
