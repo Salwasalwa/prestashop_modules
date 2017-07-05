@@ -163,4 +163,5 @@ class NewModule extends Module
     {
         $this->context->controller->addCSS($this->_path.'css/newmodule.css', 'all');
     }
+    
 }
