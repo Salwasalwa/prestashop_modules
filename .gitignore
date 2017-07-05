@@ -3,6 +3,7 @@
 !/modules
 /modules/*
 !/modules/newmodule
+!/modules/numberproduct
 
 !/config
 /config/*
