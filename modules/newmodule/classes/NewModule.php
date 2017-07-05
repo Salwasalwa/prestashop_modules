@@ -24,19 +24,19 @@ class NewModule extends Module
             $this->warning = $this->l('No name provided');
         }
     }
-    // public function install()
-    // {
-    //     if (!parent::install()) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-    //
-    // public function uninstall()
-    // {
-    //     if (!parent::uninstall()) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    public function install()
+    {
+        if (!parent::install()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function uninstall()
+    {
+        if (!parent::uninstall()) {
+            return false;
+        }
+        return true;
+    }
 }
