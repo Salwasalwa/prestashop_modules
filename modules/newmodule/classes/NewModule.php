@@ -26,10 +26,14 @@ class NewModule extends Module
     }
     public function install()
     {
-        if (!parent::install()) {
-            return false;
+        if (Shop::isFeatureActive()) {
+            Shop::setContext(Shop::CONTEXT_ALL);
         }
-        return true;
+
+        return parent::install() &&
+            $this->registerHook('leftColumn') &&
+            $this->registerHook('header') &&
+            Configuration::updateValue('NEWMODULE_NAME', 'my friend');
     }
 
     public function uninstall()
@@ -44,15 +48,13 @@ class NewModule extends Module
     {
         $output = null;
 
-        if (Tools::isSubmit('submit'.$this->name))
-        {
+        if (Tools::isSubmit('submit'.$this->name)) {
             $new_module_name = strval(Tools::getValue('NEWMODULE_NAME'));
             if (!$new_module_name
               || empty($new_module_name)
-              || !Validate::isGenericName($new_module_name))
+              || !Validate::isGenericName($new_module_name)) {
                 $output .= $this->displayError($this->l('Invalid Configuration value'));
-            else
-            {
+            } else {
                 Configuration::updateValue('NEWMODULE_NAME', $new_module_name);
                 $output .= $this->displayConfirmation($this->l('Settings updated'));
             }
@@ -121,25 +123,44 @@ class NewModule extends Module
         return $helper->generateForm($fields_form);
     }
 
-    public function getContent()
-    {
-        $output = null;
+    // public function getContent()
+    // {
+    //     $output = null;
+    //
+    //     if (Tools::isSubmit('submit'.$this->name))
+    //     {
+    //         $new_module_name = strval(Tools::getValue('NEWMODULE_NAME'));
+    //         if (!$new_module_name
+    //           || empty($new_module_name)
+    //           || !Validate::isGenericName($new_module_name))
+    //             $output .= $this->displayError($this->l('Invalid Configuration value'));
+    //         else
+    //         {
+    //             Configuration::updateValue('NEWMODULE_NAME', $new_module_name);
+    //             $output .= $this->displayConfirmation($this->l('Settings updated'));
+    //         }
+    //     }
+    //     return $output.$this->displayForm();
+    // }
 
-        if (Tools::isSubmit('submit'.$this->name))
-        {
-            $new_module_name = strval(Tools::getValue('NEWMODULE_NAME'));
-            if (!$new_module_name
-              || empty($new_module_name)
-              || !Validate::isGenericName($new_module_name))
-                $output .= $this->displayError($this->l('Invalid Configuration value'));
-            else
-            {
-                Configuration::updateValue('NEWMODULE_NAME', $new_module_name);
-                $output .= $this->displayConfirmation($this->l('Settings updated'));
-            }
-        }
-        return $output.$this->displayForm();
+    public function hookDisplayLeftColumn($params)
+    {
+        $this->context->smarty->assign(
+            array(
+              'new_module_name' => Configuration::get('newmodule_NAME'),
+              'new_module_link' => $this->context->link->getModuleLink('newmodule', 'display')
+            )
+        );
+        return $this->display(_PS_MODULE_DIR_.'newmodule/newmodule.php', 'newmodule.tpl');
     }
 
-    
+    public function hookDisplayRightColumn($params)
+    {
+        return $this->hookDisplayLeftColumn($params);
+    }
+
+    public function hookDisplayHeader()
+    {
+        $this->context->controller->addCSS($this->_path.'css/newmodule.css', 'all');
+    }
 }
