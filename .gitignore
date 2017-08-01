@@ -4,6 +4,7 @@
 /modules/*
 !/modules/newmodule
 !/modules/numberproduct
+!/modules/createTable
 
 !/config
 /config/*
