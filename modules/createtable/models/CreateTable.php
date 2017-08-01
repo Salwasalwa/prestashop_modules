@@ -1,14 +1,14 @@
 <?php
 class CreateTable extends ObjectModel
 {
-    public $id_test;
-    public $name;
+    public $id_blog;
+    public $title;
 
     public static $definition = array(
         'table' => 'blog',
-        'primary' => 'id_test',
+        'primary' => 'id_blog',
         'fields' => array(
-            'name' => 		array('type' => self::TYPE_STRING, 'validate' => 'isString')
+            'title' => array('type' => self::TYPE_STRING, 'validate' => 'isString')
         ),
     );
 }

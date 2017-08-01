@@ -44,10 +44,10 @@ class CreateTable extends Module
     {
         return Db::getInstance()->execute('
         CREATE TABLE `'.
-        _DB_PREFIX_.'test`(
-            `id_test` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            `name` VARCHAR(255) NOT NULL,
-            PRIMARY KEY (`id_test`)
+        _DB_PREFIX_.'blog`(
+            `id_blog` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            `title` VARCHAR(255) NOT NULL,
+            PRIMARY KEY (`id_blog`)
             ) DEFAULT CHARSET=utf8;');
     }
 
