@@ -9,7 +9,8 @@ class AdminCarouselController extends ModuleAdminController
 
         $this->bootstrap = true;
         $this->table = 'blog';
-        $this->className = 'CreateTable';
+        $this->className = 'BlogPost';
+        $this->actions = array('delete');
 
 
         $this->fields_list = array(

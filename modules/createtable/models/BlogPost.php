@@ -1,5 +1,5 @@
 <?php
-class CreateTable extends ObjectModel
+class BlogPost extends ObjectModel
 {
     public $id_blog;
     public $title;
