@@ -8,11 +8,12 @@ class AdminCarouselController extends ModuleAdminController
     {
 
         $this->table = 'blog';
-        $this->className = 'CreateTable';
+        $this->className = 'createTable';
+        $this->bootstrap = true;
 
 
         $this->fields_list['position'] = array(
-			'name' => array('name' => $this->l('name'),
+			'name' => array('title' => $this->l('name'),
 		);
 		$lists = parent::renderList();
 		parent::initToolbar();
